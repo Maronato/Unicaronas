@@ -106,6 +106,7 @@ INSTALLED_APPS = [
 
     'storages',
     'versatileimagefield',
+    'admin_object_actions',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'maintenance_mode.middleware.MaintenanceModeMiddleware',
+    'crum.CurrentRequestUserMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -222,9 +224,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 if not DEBUG and AWS_STORAGE_BUCKET_NAME:
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 else:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -481,3 +483,6 @@ if _GEOS_LIBRARY_PATH:
 # CORS Settings
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^(\/api\/.*|\/o\/token\/)$'
+
+# Total Virus API
+VIRUS_TOTAL_API_KEY = os.getenv('VIRUS_TOTAL_API_KEY')
