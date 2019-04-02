@@ -116,7 +116,7 @@ UNIVERSITY_ID_VALIDATORS = {
         "RA inválido para {0}"
     ),
     'facamp': UniRegexValidator(
-        r'^[a-zA-Z]{2}\d{6}$',
+        r'^\d{7,12}$',
         "RA inválido para {0}"
     )
 }
